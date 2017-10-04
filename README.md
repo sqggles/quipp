@@ -1,3 +1,26 @@
+### SuperSet
+
+#### dockerized... and how!
+
+#### Quickstart
+
+```
+cd deploy
+
+docker-compose up -d redis postgres && \
+docker-compose up -d superset && \
+docker-compose up -d worker
+
+# load some test data and sample dashboards
+docker-compose exec superset superset-demo
+
+```
+
+#### Details
+
+For Mapbox support (maps, cloropeths etc), get an API key from mapbox and stick it in the env var `MAPBOX_API_KEY`.
+See .envrc.example if you like direnv -- [https://direnv.net/](https://direnv.net/) 
+
 
 # Flask Template in Docker
 
