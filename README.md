@@ -22,6 +22,10 @@ For Mapbox support (maps, cloropeths etc), get an API key from mapbox and stick 
 See .envrc.example if you like direnv -- [https://direnv.net/](https://direnv.net/) 
 
 
+#### Work from the Future Past
+
+Get this ready for extending and churn out docker images based on latest releases.
+
 # Flask Template in Docker
 
 ## Note on Branches
