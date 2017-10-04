@@ -40,7 +40,7 @@ RUN useradd -U -m superset && \
         pyhive==0.5.0 \
         pyldap==2.4.28 \
         redis==2.10.5 \
-        sqlalchemy-redshift==0.5.0 \
+        sqlalchemy-redshift==0.7.0 \
         sqlalchemy-clickhouse==0.1.1.post3 \
         Werkzeug==0.12.1 \
         superset==${SUPERSET_VERSION}
