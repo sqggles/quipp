@@ -16,6 +16,8 @@ docker-compose exec superset superset-demo
 
 ```
 
+Wander over to `[localhost:8088](http://localhost:8088)`
+
 #### Details
 
 For Mapbox support (maps, cloropeths etc), get an API key from mapbox and stick it in the env var `MAPBOX_API_KEY`.
