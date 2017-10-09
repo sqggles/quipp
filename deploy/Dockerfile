@@ -6,7 +6,7 @@ MAINTAINER Ajish George <yell@aji.sh>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Superset version
-ARG SUPERSET_VERSION=0.20.1
+ARG SUPERSET_VERSION=0.20.3
 
 # Configure environment
 ENV LANG=C.UTF-8 \
@@ -16,35 +16,40 @@ ENV LANG=C.UTF-8 \
     SUPERSET_HOME=/home/superset
 
 # Create superset user & install dependencies
-RUN useradd -U -m superset && \
-    apt-get update && \
-    apt-get install -y \
-        build-essential \
-        curl \
-        default-libmysqlclient-dev \
-        libldap2-dev \
-        libpq-dev \
-        libsasl2-dev \
-        libssl-dev \
-        openjdk-8-jdk \
-        python3-dev \
-        python3-pip && \
-        pip3 install \
-        flask-mail==0.9.1 \
-        flask-oauth==0.12 \
-        flask_oauthlib==0.9.3 \
-        impyla==0.14.0 \
-        mysqlclient==1.3.7 \
-        psycopg2==2.6.1 \
-        pyathenajdbc==1.2.0 \
-        pyhive==0.5.0 \
-        pyldap==2.4.28 \
-        redis==2.10.5 \
-        sqlalchemy-redshift==0.7.0 \
-        sqlalchemy-clickhouse==0.1.1.post3 \
-        Werkzeug==0.12.1 \
-        pyodbc>=4.0 \
-        superset==${SUPERSET_VERSION}
+RUN useradd -U -m superset \
+        && apt-get update 
+        && apt-get install -y \
+            build-essential \
+            curl \
+            libmysqlclient-dev \
+            libldap2-dev \
+            libpq-dev \
+            libsasl2-dev \
+            libssl-dev \
+            openjdk-8-jdk \
+            python3-dev \ 
+            python3-pyodbc \
+            python3-pip \
+        && pip3 install --no-cache-dir --upgrade pip \
+        && pip3 install --no-cache-dir \
+            flask-mail>=0.9.1 \
+            flask-oauth>=0.12 \
+            flask_oauthlib>=0.9.3 \
+            impyla>=0.14.0 \
+            mysqlclient>=1.3.7 \
+            psycopg2>=2.6.1 \
+            pyathenajdbc>=1.2.0 \
+            pyhive>=0.5.0 \
+            pyldap>=2.4.28 \
+            redis>=2.10.5 \
+            sqlalchemy-redshift>=0.7.0 \
+            sqlalchemy-clickhouse>=0.1.1.post3 \
+            Werkzeug>=0.12.1 \
+            pyodbc>=4.0 \
+            superset>=${SUPERSET_VERSION} \
+        && apt-get purge --auto-remove -y gcc g++ make gfortran \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
 
 # Configure Filesystem
 COPY superset /usr/local/bin
