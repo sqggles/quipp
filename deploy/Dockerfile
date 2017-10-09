@@ -29,7 +29,7 @@ RUN useradd -U -m superset && \
         openjdk-8-jdk \
         python3-dev \
         python3-pip && \
-    pip3 install \
+        pip3 install \
         flask-mail==0.9.1 \
         flask-oauth==0.12 \
         flask_oauthlib==0.9.3 \
@@ -43,6 +43,7 @@ RUN useradd -U -m superset && \
         sqlalchemy-redshift==0.7.0 \
         sqlalchemy-clickhouse==0.1.1.post3 \
         Werkzeug==0.12.1 \
+        pyodbc>=4.0 \
         superset==${SUPERSET_VERSION}
 
 # Configure Filesystem
