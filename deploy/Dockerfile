@@ -17,7 +17,7 @@ ENV LANG=C.UTF-8 \
 
 # Create superset user & install dependencies
 RUN useradd -U -m superset \
-        && apt-get update 
+        && apt-get update \ 
         && apt-get install -y \
             build-essential \
             curl \
