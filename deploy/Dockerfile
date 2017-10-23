@@ -1,4 +1,3 @@
-
 FROM phusion/baseimage
 
 MAINTAINER Ajish George <yell@aji.sh>
@@ -7,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Superset version
 ARG SUPERSET_VERSION=0.20.3
-
+ARG DREMIO_VERSION=1.3.11.1034
 # Configure environment
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
@@ -21,6 +20,7 @@ RUN useradd -U -m superset \
         && apt-get install -y \
             build-essential \
             curl \
+            git \
             libmysqlclient-dev \
             libldap2-dev \
             libpq-dev \
@@ -30,6 +30,12 @@ RUN useradd -U -m superset \
             python3-dev \ 
             python3-pyodbc \
             python3-pip \
+            alien \
+            dpkg-dev \
+            debhelper \
+            build-essential \
+        &&  curl -O http://download.dremio.com/odbc-driver/${DREMIO_VERSION}/dremio-odbc-${DREMIO_VERSION}-1.x86_64.rpm \
+        && alien -i dremio-odbc-${DREMIO_VERSION}-1.x86_64.rpm \
         && pip3 install --no-cache-dir --upgrade pip \
         && pip3 install --no-cache-dir \
             flask-mail>=0.9.1 \
@@ -46,10 +52,12 @@ RUN useradd -U -m superset \
             sqlalchemy-clickhouse>=0.1.1.post3 \
             Werkzeug>=0.12.1 \
             pyodbc>=4.0 \
+            pytest>=3.2.3 \
             superset>=${SUPERSET_VERSION} \
+            git+https://github.com/luzfcb/sqlalchemy-access.git \
         && apt-get purge --auto-remove -y gcc g++ make gfortran \
         && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*
+        && rm -rf /var/lib/apt/lists/* 
 
 # Configure Filesystem
 COPY superset /usr/local/bin
