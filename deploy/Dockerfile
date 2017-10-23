@@ -5,7 +5,7 @@ MAINTAINER Ajish George <yell@aji.sh>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Superset version
-ARG SUPERSET_VERSION=0.20.3
+ARG SUPERSET_VERSION=0.20.4
 ARG DREMIO_VERSION=1.3.11.1034
 # Configure environment
 ENV LANG=C.UTF-8 \
